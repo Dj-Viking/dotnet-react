@@ -83,6 +83,7 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "devDependencies": {
+    "@types/node": "^17.0.35",
     "ajv": "^6.9.1",
     "cross-env": "^7.0.3",
     "eslint": "^7.25.0",

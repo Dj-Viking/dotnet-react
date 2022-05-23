@@ -8,12 +8,15 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData.tsx';
 import { Counter } from './components/Counter';
 
+
+
 import './custom.css'
 
 const App = () => {
-  const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
+  //@ts-ignore
+  const devapi = "/";
   return (
-    <BrowserRouter basename={baseUrl}>
+    <BrowserRouter basename={devapi}>
       <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
