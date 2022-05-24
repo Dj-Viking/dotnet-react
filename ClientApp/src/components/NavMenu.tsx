@@ -11,25 +11,6 @@ export const NavMenu: React.FC<{}> = () => {
     setCollapsed(state);
   }
 
-
-  // constructor(props: any) {
-  //   super(props);
-
-  //   this.toggleNavbar = function () {
-  //     this.toggleNavbar.bind(this);
-  //     return void 0;
-  //   }
-  //   this.state = {
-  //     collapsed: true
-  //   };
-  // }
-
-  // toggleNavbar() {
-  //   this.setState({
-  //     collapsed: !this.state.collapsed
-  //   });
-  // }
-
   return (
     <header>
       <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
@@ -58,6 +39,4 @@ export const NavMenu: React.FC<{}> = () => {
       </Navbar>
     </header>
   );
-  // render() {
-  // }
 }
