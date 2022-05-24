@@ -10,6 +10,9 @@ import { FetchData } from './components/FetchData.tsx';
 import Counter from './components/Counter.tsx';
 
 
+// const env = process.env;
+
+
 import './custom.css'
 
 const App = () => {
