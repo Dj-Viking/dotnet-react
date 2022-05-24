@@ -6,8 +6,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Home } from './components/Home';
 // @ts-ignore
 import { FetchData } from './components/FetchData.tsx';
-import { Counter } from './components/Counter';
-
+// @ts-ignore
+import Counter from './components/Counter.tsx';
 
 
 import './custom.css'
