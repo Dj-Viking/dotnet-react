@@ -34,7 +34,7 @@ const FetchData: React.FC<{}> = () => {
     return (
         <div>{forecasts.length ? forecasts.map((row) => {
             return (
-                <div key={Date.now() + Math.random() * 100000} style={{ "display": "flex", justifyContent: "center", flexDirection: "column" }}>
+                <div key={Date.now() + Math.random() * 100000} style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
                     <span>Date: {row.date}</span>
                     <p>Summary: {row.summary}</p>
                     <p>Temperature C: {row.temperatureC}</p>
