@@ -7,6 +7,9 @@ export const NavMenu: React.FC<{}> = () => {
 
   const [collapsed, setCollapsed] = useState<boolean>(true);
 
+  /**
+   * @param state the current state of the collapsed value true or false
+   */
   function toggleNavbar(state: boolean): void {
     setCollapsed(state);
   }
