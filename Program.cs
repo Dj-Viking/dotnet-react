@@ -1,8 +1,4 @@
 using Microsoft.Net.Http.Headers;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration.Json;
-using System.Text;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
