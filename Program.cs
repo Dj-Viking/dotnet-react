@@ -17,12 +17,18 @@ builder.Host.ConfigureAppConfiguration((hosting_context, config) =>
 });
 
 // Add services to the container.
-
 // setup app
 
-builder.Services.AddHttpClient("chuck_norris", httpClient =>
+builder.Services.AddHttpClient("weather_api_one_call", httpClient =>
 {
-    httpClient.BaseAddress = new Uri("https://api.chucknorris.io");
+    httpClient.BaseAddress = new Uri("https://api.openweathermap.org/data/3.0/onecall");//must append ?lat={lat}&lon={lon}&appid={API_KEY}
+
+    httpClient.DefaultRequestHeaders.Add(
+        HeaderNames.Accept, "application/json");
+});
+builder.Services.AddHttpClient("weather_api_current_weather", httpClient =>
+{
+    httpClient.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/weather"); // must append ?q={cityname}&appid={API_KEY}
 
     httpClient.DefaultRequestHeaders.Add(
         HeaderNames.Accept, "application/json");
