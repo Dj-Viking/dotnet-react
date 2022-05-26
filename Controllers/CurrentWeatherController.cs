@@ -27,20 +27,17 @@ public class CurrentWeatherController : ControllerBase
                     await httpClient.GetAsync(
                         $"?q={body.cityname}&appid={this._config["Api:Key"]}");
 
-                if (httpRes.IsSuccessStatusCode)
-                {
-                    using Stream? contentStream =
-                        await httpRes.Content.ReadAsStreamAsync();
-
-                    var current_weather =
-                        await JsonSerializer.DeserializeAsync<dynamic>(contentStream)!;
-
-                    return Ok(new { data = current_weather, status = 200 });
-                }
-                else
+                if (!httpRes.IsSuccessStatusCode)
                 {
                     return BadRequest(new { error = "the request to open weather api not successful", status = httpRes.StatusCode });
                 }
+                using Stream? contentStream =
+                    await httpRes.Content.ReadAsStreamAsync();
+
+                var current_weather =
+                    await JsonSerializer.DeserializeAsync<dynamic>(contentStream)!;
+
+                return Ok(new { data = current_weather, status = 200 });
             }
         }
         catch (Exception e)
