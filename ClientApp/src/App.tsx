@@ -8,11 +8,6 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData.tsx';
 // @ts-ignore
 import Counter from './components/Counter.tsx';
-
-
-// const env = process.env;
-
-
 import './custom.css'
 
 const App = () => {
