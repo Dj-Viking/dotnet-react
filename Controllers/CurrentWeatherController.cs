@@ -5,19 +5,18 @@ using System.Text.Json;
 namespace dotnet_reactredux;
 
 [ApiController]
-[Route("/city-current")]
 public class CurrentWeatherController : ControllerBase
 {
     private readonly IConfiguration _config;
     private readonly IHttpClientFactory _httpClientFactory;
-    CurrentWeatherController(IConfiguration config, IHttpClientFactory _httpClientFactory)
+    public CurrentWeatherController(IConfiguration config, IHttpClientFactory _httpClientFactory)
     {
         this._config = config;
         this._httpClientFactory = _httpClientFactory;
     }
     [HttpPost]
-    [Route("/city-current")]
-    public async Task<IActionResult> GetCityCurrentWeather([FromBody] dynamic body)
+    [Route("/api/city-current")]
+    public async Task<IActionResult> GetCityCurrentWeather([FromBody] CurrentWeatherPost body)
     {
         try
         {
@@ -26,9 +25,23 @@ public class CurrentWeatherController : ControllerBase
                 // must append ?q={cityname}&appid={API_KEY}
                 HttpResponseMessage httpRes =
                     await httpClient.GetAsync(
-                        $"?q={body.cityname}&appid{this._config["API_KEY:key"]}");
+                        $"?q={body.cityname}&appid={this._config["Api:Key"]}");
+
+                if (httpRes.IsSuccessStatusCode)
+                {
+                    using Stream? contentStream =
+                        await httpRes.Content.ReadAsStreamAsync();
+
+                    var current_weather =
+                        await JsonSerializer.DeserializeAsync<dynamic>(contentStream)!;
+
+                    return Ok(new { data = current_weather, status = 200 });
+                }
+                else
+                {
+                    return BadRequest(new { error = "the request to 3rd party api not successful", status = httpRes.StatusCode });
+                }
             }
-            return Ok();
         }
         catch (Exception e)
         {
