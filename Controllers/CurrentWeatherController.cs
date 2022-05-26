@@ -39,7 +39,7 @@ public class CurrentWeatherController : ControllerBase
                 }
                 else
                 {
-                    return BadRequest(new { error = "the request to 3rd party api not successful", status = httpRes.StatusCode });
+                    return BadRequest(new { error = "the request to open weather api not successful", status = httpRes.StatusCode });
                 }
             }
         }
