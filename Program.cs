@@ -51,8 +51,3 @@ app.MapControllerRoute(
 app.MapFallbackToFile("index.html");
 
 app.Run();
-
-
-// http client injection
-
-// config injection into the controllers
