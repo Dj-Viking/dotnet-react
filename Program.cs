@@ -1,8 +1,32 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.Net.Http.Headers;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration.Json;
+using System.Text;
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+builder.Host.ConfigureAppConfiguration((hosting_context, config) =>
+{ //TODO: inject the environment here somehow to the json file name
+    config.AddJsonFile("appsettings.json",
+                        optional: true,
+                        reloadOnChange: true);
+});
+
+// Add services to the container.
+
+// setup app
+
+builder.Services.AddHttpClient("chuck_norris", httpClient =>
+{
+    httpClient.BaseAddress = new Uri("https://api.chucknorris.io");
+
+    httpClient.DefaultRequestHeaders.Add(
+        HeaderNames.Accept, "application/json");
+});
 
 var app = builder.Build();
 
@@ -22,6 +46,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html");;
+app.MapFallbackToFile("index.html"); ;
 
 app.Run();
+
+
+// http client injection
+
+// config injection into the controllers
