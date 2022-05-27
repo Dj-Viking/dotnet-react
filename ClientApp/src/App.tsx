@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router';
 // @ts-ignore
-import Layout from './components/Layout.tsx';
+import Layout from './components/Layout/Layout.tsx';
 import { BrowserRouter } from 'react-router-dom';
-import { Home } from './components/Home';
+import { Home } from './views/Home';
 // @ts-ignore
-import { FetchData } from './components/FetchData.tsx';
+import { FetchData } from './components/FetchData/FetchData.tsx';
 // @ts-ignore
-import Counter from './components/Counter.tsx';
+import Counter from './components/Counter/Counter.tsx';
 import './custom.css'
 
 const App = () => {
