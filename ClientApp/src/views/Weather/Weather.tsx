@@ -5,8 +5,7 @@ import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 
 const FetchData: React.FC<{}> = () => {
 
-    const [currentWeather, setCurrentWeather] =
-        useState<CurrentWeatherData>(null);
+    const [currentWeather, setCurrentWeather] = useState<CurrentWeatherData>(null);
 
     const [searchSubmit, setSearchSubmit] =
         useState<SearchSubmit>({

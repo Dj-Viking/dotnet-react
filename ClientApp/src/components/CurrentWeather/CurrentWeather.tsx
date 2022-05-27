@@ -35,23 +35,24 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
                     name="city"
                     placeholder="search a city"
                     onChange={(e) => {
-                        setSearch(e.target.value)
+                        setSearch(e.target.value);
                     }}
                     value={search} />
                 <button type="submit">Search</button>
             </form>
             {
                 currentWeather
-                    ?
-                    <div style={{ display: "flex" }}>
-                        <h3 style={{ color: "black" }}>
-                            {currentWeather.data!.name}
-                        </h3>
-                    </div>
-                    :
-                    <p>
-                        no weather yet
-                    </p>
+                    ? (
+                        <div style={{ display: "flex" }}>
+                            <h3 style={{ color: "black" }}>
+                                {currentWeather.data!.name}
+                            </h3>
+                        </div>
+                    ) : (
+                        <p>
+                            no weather yet
+                        </p>
+                    )
             }
 
         </div>
