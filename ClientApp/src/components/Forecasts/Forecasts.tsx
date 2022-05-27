@@ -1,35 +1,19 @@
 import React, { useEffect, useState } from "react";
+import "./Forecasts.css"
+import { Forecast } from "../../interfaces";
 
-interface Forecast {
-    date: string;
-    temperatureF: string;
-    temperatureC: string;
-    summary: string;
-    adjacentCities: string[];
-}
+const Forecasts: React.FC<{ forecasts: Forecast[] }> = (props) => {
+    const { forecasts } = props;
+    console.log("forecasts in component", forecasts);
 
-const FetchData: React.FC<{}> = () => {
-
-    const [forecasts, setForecasts] = useState<Forecast[]>([]);
-
-    async function populateWeatherData(): Promise<Forecast[]> {
-        const response = await fetch('weatherforecast');
-        const data = await response.json();
-        return data;
-    }
 
     useEffect(() => {
-        document.title = "this is a test";
+        document.title = "Forecast";
         (async (): Promise<void> => {
-            const await_me = await populateWeatherData() as Forecast[];
-            console.log("here");
-
-            setTimeout(() => {
-                setForecasts(await_me);
-            }, 300);
+            return void 0;
         })();
         return () => void 0;
-    }, []);
+    }, [forecasts.length]);
 
     return (
         <div>{forecasts.length ? forecasts.map((row) => {
@@ -51,8 +35,6 @@ const FetchData: React.FC<{}> = () => {
             );
         }) : <div className="text-dark">loading...</div>}</div>
     );
-
 }
 
-
-export { FetchData };
+export default Forecasts;

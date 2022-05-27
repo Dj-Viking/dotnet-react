@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Container } from 'reactstrap';
 // @ts-ignore
-import { NavMenu } from './NavMenu.tsx';
+import { NavMenu } from '../NavMenu/NavMenu';
 
 interface LayoutProps {
   children: ReactNode[] | ReactNode

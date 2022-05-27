@@ -31,7 +31,7 @@ export const NavMenu: React.FC<{}> = () => {
                 <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/weather-data">Weather</NavLink>
               </NavItem>
               {/* <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/hybrid">this is a test</NavLink>

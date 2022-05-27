@@ -4,6 +4,8 @@
 # dotnet build
 bin/
 obj/
+appsettings.json
+appsettings.*.json
 
 
 # User-specific files
