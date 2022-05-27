@@ -1,3 +1,8 @@
+export interface SearchSubmit {
+    submitted: boolean;
+    city: string;
+}
+
 export interface Forecast {
     date: string;
     temperatureF: string;
@@ -5,6 +10,13 @@ export interface Forecast {
     summary: string;
     adjacentCities: string[];
 }
+
+export type GetCurrentWeatherDataResult = {
+    status: number | null,
+    data?: CurrentWeatherData | null;
+} & {
+    error: unknown
+} | null
 
 export type CurrentWeatherData = {
     coord: Coord;

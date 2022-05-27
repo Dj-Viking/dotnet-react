@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Forecast.css"
+import "./Forecasts.css"
 import { Forecast } from "../../interfaces";
 
 const Forecasts: React.FC<{ forecasts: Forecast[] }> = (props) => {

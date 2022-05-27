@@ -5,7 +5,7 @@ import Layout from './components/Layout/Layout.tsx';
 import { BrowserRouter } from 'react-router-dom';
 import { Home } from './views/Home/Home';
 // @ts-ignore
-import { FetchData } from './views/Weather/FetchData.tsx';
+import { FetchData } from './views/Weather/Weather.tsx';
 // @ts-ignore
 import Counter from './components/Counter/Counter.tsx';
 import './custom.css'
