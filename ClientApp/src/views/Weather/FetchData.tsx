@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Forecast, CurrentWeatherData } from "../../interfaces";
-import Forecasts from "../Forecasts/Forecasts";
+import Forecasts from "../../components/Forecasts/Forecasts";
 
 
 const FetchData: React.FC<{}> = () => {

@@ -3,9 +3,9 @@ import { Route } from 'react-router';
 // @ts-ignore
 import Layout from './components/Layout/Layout.tsx';
 import { BrowserRouter } from 'react-router-dom';
-import { Home } from './views/Home';
+import { Home } from './views/Home/Home';
 // @ts-ignore
-import { FetchData } from './components/FetchData/FetchData.tsx';
+import { FetchData } from './views/Weather/FetchData.tsx';
 // @ts-ignore
 import Counter from './components/Counter/Counter.tsx';
 import './custom.css'
@@ -18,7 +18,7 @@ const App = () => {
       <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
+        <Route path='/weather-data' component={FetchData} />
       </Layout>
     </BrowserRouter>
   );
