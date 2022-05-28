@@ -49,7 +49,7 @@ export default new class WeatherService implements IWeatherService {
             const data = await response.json();
             return {
                 status: 200,
-                data,
+                data: data.data,
                 error: null
             };
         } catch (error) {
