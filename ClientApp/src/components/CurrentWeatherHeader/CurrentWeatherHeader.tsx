@@ -4,12 +4,11 @@ import { todaysDate, formatTime } from "../../utils";
 import "./CurrentWeatherHeader.css"
 
 interface CurrentWeatherHeaderProps {
-    cityname: string;
     currentWeather: CurrentWeatherData;
 }
 
 const CurrentWeatherHeader: React.FC<CurrentWeatherHeaderProps> = (props) => {
-    const { currentWeather, cityname } = props;
+    const { currentWeather } = props;
     const [time, setTime] = useState<string>(formatTime(Date.now()));
     const counterRef = useRef<NodeJS.Timer | null>(null);
 
@@ -34,7 +33,7 @@ const CurrentWeatherHeader: React.FC<CurrentWeatherHeaderProps> = (props) => {
         <div>
             <div className="card" style={{ width: "100%" }}>
                 <div className="card-body">
-                    <h5 className="card-title">{cityname} {todaysDate()} time: {time}</h5>
+                    <h5 className="card-title">{currentWeather?.name} {todaysDate()} time: {time}</h5>
                     <img
                         className="card-img-top"
                         style={{ height: "auto", width: "10%" }}

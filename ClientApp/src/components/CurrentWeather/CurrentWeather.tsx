@@ -99,7 +99,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
                 currentWeather
                     ? (
                         <div style={{ display: "flex" }}>
-                            <CurrentWeatherHeader cityname={search} currentWeather={currentWeather} />
+                            <CurrentWeatherHeader currentWeather={currentWeather} />
                         </div>
                     ) : (
                         <p>
