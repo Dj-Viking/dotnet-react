@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CurrentWeatherData, SearchSubmit } from "../../interfaces";
+import CurrentWeatherHeader from "../CurrentWeatherHeader/CurrentWeatherHeader";
 import "./CurrentWeather.css"
 
 interface CurrentWeatherProps {
@@ -20,7 +21,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
                             child.map((item, i) => {
                                 return (
                                     <span key={i}>
-                                        {item}
+                                        &nbsp; {item}
                                     </span>
                                 );
                             })
@@ -35,7 +36,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
                         {childArr.map((item, i) => {
                             return (
                                 <span key={i}>
-                                    what: {item}
+                                    &nbsp; what: {item}
                                 </span>
                             );
                         })}
@@ -44,7 +45,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
             } else {
                 return (
                     <span>
-                        {child}
+                        &nbsp; {child}
                     </span>
                 );
             }
@@ -98,24 +99,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
                 currentWeather
                     ? (
                         <div style={{ display: "flex" }}>
-                            {
-                                <div>
-                                    {
-                                        Object.keys(currentWeather).map((key, i) => {
-                                            return (
-                                                <div key={i}>
-                                                    <p>
-                                                        Key: {key}
-                                                    </p>
-                                                    <p>
-                                                        {renderData(currentWeather[key as keyof CurrentWeatherData])}
-                                                    </p>
-                                                </div>
-                                            );
-                                        })
-                                    }
-                                </div>
-                            }
+                            <CurrentWeatherHeader cityname={search} currentWeather={currentWeather} />
                         </div>
                     ) : (
                         <p>
