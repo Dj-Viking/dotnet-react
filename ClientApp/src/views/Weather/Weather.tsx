@@ -3,7 +3,7 @@ import { CurrentWeatherData, SearchSubmit } from "../../interfaces";
 import WeatherService from "../../Services/WeatherService"
 import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 
-const FetchData: React.FC<{}> = () => {
+const Weather: React.FC<{}> = () => {
 
     const [currentWeather, setCurrentWeather] = useState<CurrentWeatherData>(null);
 
@@ -56,4 +56,4 @@ const FetchData: React.FC<{}> = () => {
 }
 
 
-export { FetchData };
+export { Weather };

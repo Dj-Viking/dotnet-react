@@ -6,6 +6,8 @@ bin/
 obj/
 appsettings.json
 appsettings.*.json
+timezones.json
+combined-*
 
 
 # User-specific files

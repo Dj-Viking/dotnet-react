@@ -6,67 +6,10 @@ import "./CurrentWeather.css"
 interface CurrentWeatherProps {
     currentWeather?: null | CurrentWeatherData;
     setCitySearch: Dispatch<SetStateAction<SearchSubmit>>;
-
 }
 
 const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
     const { currentWeather, setCitySearch } = props;
-
-    function renderData(data: CurrentWeatherData): JSX.Element {
-        function renderChilds(child: any): JSX.Element {
-            if (Array.isArray(child)) {
-                return (
-                    <span>
-                        {
-                            child.map((item, i) => {
-                                return (
-                                    <span key={i}>
-                                        &nbsp; {item}
-                                    </span>
-                                );
-                            })
-                        }
-                    </span>
-                );
-            }
-            if (typeof child === "object") {
-                const childArr = Object.keys(child).map(key => child[key]);
-                return (
-                    <span>
-                        {childArr.map((item, i) => {
-                            return (
-                                <span key={i}>
-                                    &nbsp; what: {item}
-                                </span>
-                            );
-                        })}
-                    </span>
-                );
-            } else {
-                return (
-                    <span>
-                        &nbsp; {child}
-                    </span>
-                );
-            }
-        }
-        // @ts-ignore
-        const dataArr = Object.keys(data!).map(key => data[key as any]);
-        return (
-            <span>
-                {
-                    dataArr.map((item, i) => {
-                        return (
-                            <span key={i}>
-                                {renderChilds(item)}
-                            </span>
-                        );
-                    })
-                }
-            </span>
-        );
-
-    }
 
     console.log("current weather now", currentWeather);
     const [search, setSearch] = useState<string>("");
@@ -83,24 +26,29 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input
-                    required
-                    autoComplete="off"
-                    type="text"
-                    name="city"
-                    placeholder="search a city"
-                    onChange={(e) => {
-                        setSearch(e.target.value);
-                    }}
-                    value={search} />
-                <button type="submit">Search</button>
-            </form>
+                <div className="form-group mb-2">
+                    <input
+                        required
+                        autoComplete="off"
+                        type="text"
+                        name="city"
+                        style={{ width: "30%", display: "inline-block", marginRight: "1em" }}
+                        className="form-control"
+                        placeholder="search a city"
+                        onChange={(e) => {
+                            setSearch(e.target.value);
+                        }}
+                        value={search} />
+                    <button style={{ marginBottom: "3px" }} className="btn btn-primary" type="submit">
+                        Search</button>
+                </div>
+            </form >
             {
                 currentWeather
                     ? (
-                        <div style={{ display: "flex" }}>
+                        <div style={{ display: "flex" }} >
                             <CurrentWeatherHeader currentWeather={currentWeather} />
-                        </div>
+                        </div >
                     ) : (
                         <p>
                             no weather yet
@@ -108,7 +56,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
                     )
             }
 
-        </div>
+        </div >
     );
 }
 
