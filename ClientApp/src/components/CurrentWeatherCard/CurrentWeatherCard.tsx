@@ -7,13 +7,13 @@ import {
     convertSecondsToHours,
     searchedCityLocalTime
 } from "../../utils";
-import "./CurrentWeatherHeader.css"
+import "./CurrentWeatherCard.css"
 
-interface CurrentWeatherHeaderProps {
+interface CurrentWeatherCardProps {
     currentWeather: CurrentWeatherData;
 }
 
-const CurrentWeatherHeader: React.FC<CurrentWeatherHeaderProps> = (props) => {
+const CurrentWeatherCard: React.FC<CurrentWeatherCardProps> = (props) => {
     const { currentWeather } = props;
     const [time, setTime] = useState<string>(formatTime(Date.now()));
     const counterRef = useRef<NodeJS.Timer | null>(null);
@@ -22,7 +22,7 @@ const CurrentWeatherHeader: React.FC<CurrentWeatherHeaderProps> = (props) => {
         counterRef.current = setInterval(() => {
             setTime(formatTime(Date.now()));
         }, 1000);
-    }, [setTime, currentWeather?.timezone]);
+    }, [setTime]);
 
     useEffect(() => {
         clearInterval(counterRef.current as NodeJS.Timer)
@@ -58,5 +58,5 @@ const CurrentWeatherHeader: React.FC<CurrentWeatherHeaderProps> = (props) => {
     );
 }
 
-export default CurrentWeatherHeader;
+export default CurrentWeatherCard;
 

@@ -1,5 +1,6 @@
-echo 'stopping dotnet process(s)'
+echo 'stopping dotnet and node process(s)'
 killall dotnet;
+killall node;
 echo 'destroying previous dlls'
 echo '------------------------'
 rm -rf obj/
