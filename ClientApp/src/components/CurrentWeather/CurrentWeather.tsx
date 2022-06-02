@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { CurrentWeatherData, SearchSubmit } from "../../interfaces";
-import CurrentWeatherHeader from "../CurrentWeatherHeader/CurrentWeatherHeader";
+import CurrentWeatherHeader from "../CurrentWeatherCard/CurrentWeatherCard";
 import "./CurrentWeather.css"
 
 interface CurrentWeatherProps {
