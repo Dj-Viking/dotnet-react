@@ -1,6 +1,12 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { CurrentWeatherData } from "../../interfaces";
-import { todaysDate, formatTime, convertKelvintoFC, convertSecondsToHours, createTzTable } from "../../utils";
+import {
+    todaysDate,
+    formatTime,
+    convertKelvintoFC,
+    convertSecondsToHours,
+    searchedCityLocalTime
+} from "../../utils";
 import "./CurrentWeatherHeader.css"
 
 interface CurrentWeatherHeaderProps {
@@ -9,31 +15,34 @@ interface CurrentWeatherHeaderProps {
 
 const CurrentWeatherHeader: React.FC<CurrentWeatherHeaderProps> = (props) => {
     const { currentWeather } = props;
-
-    console.log("time zone table", createTzTable(currentWeather?.timezone!));
-
-    const city_coords = useRef<[number, number]>([currentWeather?.coord.lat!, currentWeather?.coord.lon!]);
-    const [time, setTime] = useState<string>(formatTime(Date.now(), city_coords.current));
+    const [time, setTime] = useState<string>(formatTime(Date.now()));
     const counterRef = useRef<NodeJS.Timer | null>(null);
 
-    function resetTimer() {
+    const resetTimer = useCallback(() => {
         counterRef.current = setInterval(() => {
-            setTime(formatTime(Date.now(), city_coords.current));
+            setTime(formatTime(Date.now()));
         }, 1000);
-    }
+    }, [setTime, currentWeather?.timezone]);
 
     useEffect(() => {
         clearInterval(counterRef.current as NodeJS.Timer)
         resetTimer();
-    }, []);
+        return () => clearInterval(counterRef.current as NodeJS.Timer);
+    }, [resetTimer]);
 
     return (
         <div>
             <div className="card" style={{ width: "100%" }}>
                 <div className="card-body">
                     <h5 className="card-title">{currentWeather?.name} {todaysDate()} | Your Local Time: {time}</h5>
-                    <p>
-                        timezone value {convertSecondsToHours(currentWeather?.timezone!)}
+                    <p className="card-text">
+                        timezone offset hours from UTC: {currentWeather?.timezone! < 0 ? "-" : "+"}{Math.abs(convertSecondsToHours(currentWeather?.timezone!))}
+                    </p>
+                    <p className="card-text">
+                        UTC now: {new Date().toUTCString().split(" ")[4]}
+                    </p>
+                    <p className="card-text">
+                        {currentWeather?.name} local time: {searchedCityLocalTime(convertSecondsToHours(currentWeather?.timezone!), new Date().toUTCString().split(" ")[4])}
                     </p>
                     <img
                         className="card-img-top"

@@ -16,20 +16,7 @@ export function todaysDate(): string {
  * @param coords tuple containing the lat and long coordinates of the city
  * @returns {string | ""} formatted 24hr local time of the city
  */
-export function formatTime(date_now: number, coords: [number, number]): string {
-    // TODO: get local time to the location of the searched city
-    // function get_time_from_point(timestamp: number, point: [number, number]) {
-    //     const [lat, lon] = point;
-    //     const tile = tileBelt.pointToTile(lat, lon, z).join("/");
-    //     console.log("tile", tile);
-    //     const locale = tiles[tile as any];
-
-    //     if (locale) return tz(new Date(timestamp), locale)
-    //     else return "";
-    // }
-
-    // const str = get_time_from_point(date_now, coords);
-    // console.log("time thing", str);
+export function formatTime(date_now: number): string {
     let now = new Date(date_now);
     return `${now.getHours() < 10 ? "0" : ""}${now.getHours()}:${now.getMinutes() < 10 ? "0" : ""}${now.getMinutes()}:${now.getSeconds() < 10 ? "0" : ""}${now.getSeconds()} `;
 }
@@ -46,20 +33,20 @@ export function convertKelvintoFC(kelvin: string): [number, number] {
 /**
  * 
  * @param seconds +- seconds offset from UTC
- * @returns hours offset from UTC
+ * @returns +- hours offset from UTC
  */
 export function convertSecondsToHours(seconds: number): number {
     return seconds / 3600;
+    // return Math.abs(seconds) / 3600;
 }
 
 export function getLocalTimeOffsetFromUTC(date_now: number, utc_hrs_offset: number, key: number): string {
     const now = new Date(date_now);
 
-    const final_hrs = now.getHours() + utc_hrs_offset + key;
+    const final_hrs = now.getHours() + Math.abs(utc_hrs_offset) + key;
     let ret_str = `${final_hrs < 10 ? "0" : ""}${final_hrs}:${now.getMinutes() < 10 ? "0" : ""}${now.getMinutes()}:${now.getSeconds() < 10 ? "0" : ""}${now.getSeconds()}`;
-    // console.log("ret str", ret_str);
-
     return ret_str;
+
 }
 export type UTCOffsetInHours = number;
 export type LocalTimeCalc = string;
@@ -79,6 +66,22 @@ export function createKey(index: number): number | void {
         }
         default: return void 0; //should be unreachable
     }
+}
+
+export function searchedCityLocalTime(searched_tz_offset: number, utc_now_time_str: string): string {
+    let utc_now_hours: number = Number(utc_now_time_str.split(":")[0]);
+    const utc_now_mins: number = Number(utc_now_time_str.split(":")[1]);
+    const utc_now_secs: number = Number(utc_now_time_str.split(":")[2]);
+    let new_str = "";
+    (() => {
+        if (searched_tz_offset < 0) {
+            utc_now_hours += searched_tz_offset;
+        } else {
+            utc_now_hours += searched_tz_offset;
+        }
+    })();
+    new_str = `${(utc_now_hours) < 10 ? "0" : ""}${utc_now_hours}:${utc_now_mins < 10 ? "0" : ""}${utc_now_mins}:${utc_now_secs < 10 ? "0" : ""}${utc_now_secs}`
+    return new_str;
 }
 
 export function createTzTable(utc_secs_offset: number): TimezoneTable {
