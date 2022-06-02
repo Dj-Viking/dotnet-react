@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { CurrentWeatherData, SearchSubmit } from "../../interfaces";
-import CurrentWeatherHeader from "../CurrentWeatherCard/CurrentWeatherCard";
+import CurrentWeatherCard from "../CurrentWeatherCard/CurrentWeatherCard";
 import "./CurrentWeather.css"
 
 interface CurrentWeatherProps {
@@ -47,7 +47,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
                 currentWeather
                     ? (
                         <div style={{ display: "flex" }} >
-                            <CurrentWeatherHeader currentWeather={currentWeather} />
+                            <CurrentWeatherCard currentWeather={currentWeather} />
                         </div >
                     ) : (
                         <p>
