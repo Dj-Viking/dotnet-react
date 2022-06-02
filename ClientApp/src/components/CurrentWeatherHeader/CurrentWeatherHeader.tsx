@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { CurrentWeatherData } from "../../interfaces";
-import { todaysDate, formatTime, convertKelvintoFC } from "../../utils";
+import { todaysDate, formatTime, convertKelvintoFC, convertSecondsToHours, createTzTable } from "../../utils";
 import "./CurrentWeatherHeader.css"
 
 interface CurrentWeatherHeaderProps {
@@ -9,6 +9,9 @@ interface CurrentWeatherHeaderProps {
 
 const CurrentWeatherHeader: React.FC<CurrentWeatherHeaderProps> = (props) => {
     const { currentWeather } = props;
+
+    console.log("time zone table", createTzTable(currentWeather?.timezone!));
+
     const city_coords = useRef<[number, number]>([currentWeather?.coord.lat!, currentWeather?.coord.lon!]);
     const [time, setTime] = useState<string>(formatTime(Date.now(), city_coords.current));
     const counterRef = useRef<NodeJS.Timer | null>(null);
@@ -29,6 +32,9 @@ const CurrentWeatherHeader: React.FC<CurrentWeatherHeaderProps> = (props) => {
             <div className="card" style={{ width: "100%" }}>
                 <div className="card-body">
                     <h5 className="card-title">{currentWeather?.name} {todaysDate()} | Your Local Time: {time}</h5>
+                    <p>
+                        timezone value {convertSecondsToHours(currentWeather?.timezone!)}
+                    </p>
                     <img
                         className="card-img-top"
                         style={{ height: "auto", width: "10%" }}
@@ -44,3 +50,4 @@ const CurrentWeatherHeader: React.FC<CurrentWeatherHeaderProps> = (props) => {
 }
 
 export default CurrentWeatherHeader;
+
