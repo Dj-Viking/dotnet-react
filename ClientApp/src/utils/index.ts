@@ -83,7 +83,11 @@ export function searchedCityLocalTime(searched_tz_offset: number, utc_now_time_s
             utc_now_hours = utc_now_hours + 12;
         }
     } else {
+        //handle overflow
         utc_now_hours += searched_tz_offset;
+        if (utc_now_hours >= 24) {
+            utc_now_hours = utc_now_hours - 24;
+        }
     }
 
     new_str = `${(utc_now_hours) < 10 ? "0" : ""}${utc_now_hours}:${utc_now_mins < 10 ? "0" : ""}${utc_now_mins}:${utc_now_secs < 10 ? "0" : ""}${utc_now_secs}`
