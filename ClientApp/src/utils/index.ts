@@ -69,21 +69,32 @@ export function createKey(index: number): number | void {
 }
 
 export function searchedCityLocalTime(searched_tz_offset: number, utc_now_time_str: string): string {
+
     let utc_now_hours: number = Number(utc_now_time_str.split(":")[0]);
     const utc_now_mins: number = Number(utc_now_time_str.split(":")[1]);
     const utc_now_secs: number = Number(utc_now_time_str.split(":")[2]);
     let new_str = "";
-    (() => {
-        if (searched_tz_offset < 0) {
-            utc_now_hours += searched_tz_offset;
-        } else {
-            utc_now_hours += searched_tz_offset;
+
+    if (searched_tz_offset < 0) {
+        utc_now_hours += searched_tz_offset;
+        // handle underflow if still a negative number
+        // task/17/overflow-underflow
+        if (utc_now_hours < 0) {
+            utc_now_hours = utc_now_hours + 12;
         }
-    })();
+    } else {
+        //handle overflow
+        utc_now_hours += searched_tz_offset;
+        if (utc_now_hours >= 24) {
+            utc_now_hours = utc_now_hours - 24;
+        }
+    }
+
     new_str = `${(utc_now_hours) < 10 ? "0" : ""}${utc_now_hours}:${utc_now_mins < 10 ? "0" : ""}${utc_now_mins}:${utc_now_secs < 10 ? "0" : ""}${utc_now_secs}`
     return new_str;
 }
 
+// unused....
 export function createTzTable(utc_secs_offset: number): TimezoneTable {
     let table = {} as TimezoneTable;
     for (let i = 1; i < 50; i++) {
